@@ -1,0 +1,12 @@
+{application, encrypter,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { encrypter_app, []}},
+  {env, []}
+ ]}.
