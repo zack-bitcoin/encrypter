@@ -12,11 +12,11 @@ new_key(P) ->
    {Pub, Priv} = crypto:generate_key(ecdh, params(), de(P)),
     {en(Pub), en(Priv)}.
     
-sign(S, Priv) -> en(crypto:sign(ecdsa, sha256, term_to_binary(S), [de(Priv), params()])).
+sign(S, Priv) -> en(crypto:sign(ecdsa, sha256, serialize(S), [de(Priv), params()])).
 verify_sig(S, Sig, Pub) -> 
     SD = de(Sig),
     PD = de(Pub),
-    crypto:verify(ecdsa, sha256, term_to_binary(S), SD, [PD, params()]).
+    crypto:verify(ecdsa, sha256, serialize(S), SD, [PD, params()]).
 serialize(X) when is_binary(X) -> 
     S = size(X),
     <<0:8, S:32, X/binary>>;
@@ -35,9 +35,8 @@ serialize(X) when is_atom(X) ->
     S = size(A),
     <<4:8, S:32, A/binary>>;
 serialize(X) -> 
-    io:fwrite("testnet sign serialize error below\n"),
+    io:fwrite("testnet sign serialize error"),
     io:fwrite(packer:pack(X)),
-    io:fwrite("testnet sign serialize error above\n"),
     1=2.
 serialize_list([]) -> <<>>;
 serialize_list([A|B]) -> 
