@@ -23,13 +23,13 @@ sym_dec(Key, Emsg) -> packer:unpack(bin_dec(Key, Emsg)).
 %this version is good for a blockchain situation where you want to send a message to someone who's public key you know.
 send_msg(M, ToPub, FromPub, FromPriv) -> 
     {EphPub, EphPriv} = sign:new_key(),
-    Msg = #msg{sig=sign:sign(EphPub, FromPriv), msg=M, id = FromPub},
+    Msg = #msg{sig=sign:sign(EphPub, base64:decode(FromPriv)), msg=M, id = FromPub},
     SS = sign:shared_secret(ToPub, EphPriv),
     Emsg = sym_enc(SS, Msg),
     #emsg{key=EphPub, msg=base64:encode(Emsg)}.
 get_msg(Msg, Priv) ->
     Sig = sym_dec(sign:shared_secret(Msg#emsg.key, Priv), base64:decode(Msg#emsg.msg)),
-    true = sign:verify_sig(Msg#emsg.key, Sig#msg.sig, Sig#msg.id),
+    true = sign:verify_sig(Msg#emsg.key, Sig#msg.sig, base64:decode(Sig#msg.id)),
     Sig.
 %This version can be used over and over to encrypt data with the same secret.
 to_priv(X) ->
