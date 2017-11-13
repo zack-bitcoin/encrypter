@@ -12,10 +12,10 @@ new_key(P) ->
    {Pub, Priv} = crypto:generate_key(ecdh, params(), de(P)),
     {en(Pub), en(Priv)}.
     
-sign(S, Priv) -> en(crypto:sign(ecdsa, sha256, serialize(S), [de(Priv), params()])).
+sign(S, Priv) -> en(crypto:sign(ecdsa, sha256, serialize(S), [Priv, params()])).
 verify_sig(S, Sig, Pub) -> 
     SD = de(Sig),
-    PD = de(Pub),
+    PD = Pub,
     crypto:verify(ecdsa, sha256, serialize(S), SD, [PD, params()]).
 serialize(X) when is_binary(X) -> 
     S = size(X),
