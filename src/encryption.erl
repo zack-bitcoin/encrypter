@@ -16,8 +16,10 @@ bin_enc(Key, Bin) ->
 bin_dec(Key, Msg) ->
     {_, Y} = crypto:stream_decrypt(si(Key), Msg),
     Y.
-sym_enc(Key, Msg) -> bin_enc(Key, term_to_binary(Msg)).
-sym_dec(Key, Emsg) -> binary_to_term(bin_dec(Key, Emsg)).
+%sym_enc(Key, Msg) -> bin_enc(Key, term_to_binary(Msg)).
+sym_enc(Key, Msg) -> bin_enc(Key, packer:pack(Msg)).
+%sym_dec(Key, Emsg) -> binary_to_term(bin_dec(Key, Emsg)).
+sym_dec(Key, Emsg) -> packer:unpack(bin_dec(Key, Emsg)).
 %this version is good for a blockchain situation where you want to send a message to someone who's public key you know.
 send_msg(M, ToPub, FromPub, FromPriv) -> 
     {EphPub, EphPriv} = sign:new_key(),
@@ -38,10 +40,10 @@ encrypt(File, Secret) ->
     Priv = to_priv(Secret),
     {TempPub, TempPriv} = sign:new_key(TempPriv),
     {Pub, Priv} = sign:new_key(Priv),
-    term_to_binary(send_msg(File, Pub, TempPub, TempPriv)).
+    send_msg(File, Pub, TempPub, TempPriv).
 decrypt(Encrypted, Secret) ->
     Priv = to_priv(Secret),
-    (get_msg(binary_to_term(Encrypted), Priv))#msg.msg.
+    (get_msg(Encrypted, Priv))#msg.msg.
     
 test() ->
     {Pub, Priv} = sign:new_key(),
