@@ -1,5 +1,5 @@
 -module(sign).
--export([test/0,new_key/0,new_key/1,sign/2,verify_sig/3,shared_secret/2]).
+-export([test/0,new_key/0,new_key/1,sign/2,verify_sig/3,shared_secret/2, serialize/1]).
 en(X) -> base64:encode(X).
 de(X) -> base64:decode(X).
 params() -> crypto:ec_curve(secp256k1).
