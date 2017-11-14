@@ -22,11 +22,11 @@ serialize(X) when is_binary(X) ->
     <<0:8, S:32, X/binary>>;
 serialize(L) when is_list(L) ->
     A = serialize_list(L),
-    S = length(L),
+    S = size(A),
     <<1:8, S:32, A/binary>>;
 serialize(X) when is_tuple(X) -> 
     A = serialize_list(tuple_to_list(X)),
-    S = size(X),
+    S = size(A),
     <<2:8, S:32, A/binary>>;
 serialize(X) when is_integer(X) -> 
     <<3:8, X:512>>;
