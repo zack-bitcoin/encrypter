@@ -48,6 +48,8 @@ test() ->
     {Pub, Priv} = new_key(),
     {Pub2, Priv2} = new_key(),
     S = <<"abc">>,
+    S1 = <<1,2,3>>,
+    verify_sig(S1, sign(S, Priv), Pub),
     verify_sig(S, sign(S, Priv), Pub),
     SS = shared_secret(Pub, Priv2),
     SS = shared_secret(Pub2, Priv),
