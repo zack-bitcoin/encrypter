@@ -139,7 +139,7 @@ is_b_atom(<<"new_governance_oracle">>) -> true;
 is_b_atom(<<"oracle_new">>) -> true;
 is_b_atom(<<"oracle_bet">>) -> true;
 is_b_atom(<<"oracle_close">>) -> true;
-is_b_atom(<<"oracle_shares">>) -> true;
+is_b_atom(<<"oracle_winnings">>) -> true;
 is_b_atom(<<"oracle_unmatched">>) -> true;
 is_b_atom(<<"pubkey">>) -> true;
 is_b_atom(<<"new_pubkey">>) -> true;
