@@ -22,7 +22,12 @@ bin_dec(Key, Msg) ->
 %sym_enc(Key, Msg) -> bin_enc(Key, term_to_binary(Msg)).
 sym_enc(Key, Msg) -> bin_enc(Key, packer:pack(Msg)).
 %sym_dec(Key, Emsg) -> binary_to_term(bin_dec(Key, Emsg)).
-sym_dec(Key, Emsg) -> packer:unpack(bin_dec(Key, Emsg)).
+sym_dec(Key, Emsg) -> 
+    B = bin_dec(Key, Emsg),
+    io:fwrite("improperly packed thing "),
+    io:fwrite(B),
+    io:fwrite("\n"),
+    packer:unpack(bin_dec(Key, Emsg)).
 %this version is good for a blockchain situation where you want to send a message to someone who's public key you know.
 send_msg(M, ToPub, FromPub, FromPriv) -> 
     {EphPub, EphPriv} = sign:new_key(),
