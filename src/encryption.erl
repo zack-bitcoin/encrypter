@@ -27,13 +27,20 @@ sym_dec(Key, Emsg) -> packer:unpack(bin_dec(Key, Emsg)).
 send_msg(M, ToPub, FromPub, FromPriv) -> 
     {EphPub, EphPriv} = sign:new_key(),
     Msg = #msg{sig=sign:sign(EphPub, base64:decode(FromPriv)), msg=M, id = FromPub},
+    %io:fwrite("send message is "),
+    %io:fwrite(Msg),% {msg, <<bytes>>, {f, <<bytes>>}, <<base64>>}
+    %io:fwrite("\n"),
     SS = sign:shared_secret(ToPub, EphPriv),
     Emsg = sym_enc(base64:decode(SS), Msg),
     #emsg{key=EphPub, msg=base64:encode(Emsg)}.
 get_msg(Msg, Priv) ->
+    io:fwrite("encryption get msg 0\n"),
     SS = sign:shared_secret(Msg#emsg.key, Priv),
+    io:fwrite("encryption get msg 1\n"),
     Sig = sym_dec(base64:decode(SS), base64:decode(Msg#emsg.msg)),
-    true = sign:verify_sig(Msg#emsg.key, Sig#msg.sig, base64:decode(Sig#msg.id)),
+    io:fwrite("encryption get msg 2\n"),
+    true = sign:verify_sig(Msg#emsg.key, Sig#msg.sig, base64:decode(Sig#msg.id)),%(data, signature, pubkey)
+    io:fwrite("encryption get msg 3\n"),
     Sig.
 %This version can be used over and over to encrypt data with the same secret.
 to_priv(X) ->
@@ -61,6 +68,16 @@ test() ->
     true = bin_dec(Secret, bin_enc(Secret, Val)) == Val,
     true = bin_dec(Secret, bin_enc(Secret, Binary)) == Binary,
     Record = {f, Binary},
+    SM = send_msg(Record, Pub2, Pub, Priv),
+    %io:fwrite(SM),
+                            %{emsg,<<"BI+wqb4WGYa2NQkQ3LtgGyT/9JjZjCQmlJkWZPtgNy6YeQKieeDVWD5EVmivPUvBdCvCFrZngA50RbBqqbS6Obs=">>,
+                            %      <<"88sF3lodacpZkcVrZUsMtXPCUxzMD8Pss66d0KebKHJVDK5eeTgJV9CZCfkHVoOkBmZI2oz3fjjo1Z9aMs7+FN6bGaCrVocB"...>>},
+    %io:fwrite(Priv2), %gFEvbHycbSEnigYBtqhQaBOQ+1mQvWlpApvzZLpJ0AI=
+    io:fwrite("\n"),
+    %io:fwrite(SM),
+    io:fwrite("\n"),
+    io:fwrite(integer_to_list(size(element(3, SM)))), %324
+    io:fwrite("\n"),
     Sig = get_msg(send_msg(Record, Pub2, Pub, Priv), Priv2),
     true = Sig#msg.msg == Record,
     Secret2 = <<1,5,3,7,4>>,
