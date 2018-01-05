@@ -24,28 +24,18 @@ sym_enc(Key, Msg) -> bin_enc(Key, packer:pack(Msg)).
 %sym_dec(Key, Emsg) -> binary_to_term(bin_dec(Key, Emsg)).
 sym_dec(Key, Emsg) -> 
     B = bin_dec(Key, Emsg),
-    io:fwrite("improperly packed thing "),
-    io:fwrite(B),
-    io:fwrite("\n"),
     packer:unpack(bin_dec(Key, Emsg)).
 %this version is good for a blockchain situation where you want to send a message to someone who's public key you know.
 send_msg(M, ToPub, FromPub, FromPriv) -> 
     {EphPub, EphPriv} = sign:new_key(),
     Msg = #msg{sig=sign:sign(EphPub, base64:decode(FromPriv)), msg=M, id = FromPub},
-    %io:fwrite("send message is "),
-    %io:fwrite(Msg),% {msg, <<bytes>>, {f, <<bytes>>}, <<base64>>}
-    %io:fwrite("\n"),
     SS = sign:shared_secret(ToPub, EphPriv),
     Emsg = sym_enc(base64:decode(SS), Msg),
     #emsg{key=EphPub, msg=base64:encode(Emsg)}.
 get_msg(Msg, Priv) ->
-    io:fwrite("encryption get msg 0\n"),
     SS = sign:shared_secret(Msg#emsg.key, Priv),
-    io:fwrite("encryption get msg 1\n"),
     Sig = sym_dec(base64:decode(SS), base64:decode(Msg#emsg.msg)),
-    io:fwrite("encryption get msg 2\n"),
     true = sign:verify_sig(Msg#emsg.key, Sig#msg.sig, base64:decode(Sig#msg.id)),%(data, signature, pubkey)
-    io:fwrite("encryption get msg 3\n"),
     Sig.
 %This version can be used over and over to encrypt data with the same secret.
 to_priv(X) ->
@@ -62,6 +52,16 @@ decrypt(Encrypted, Secret) ->
     (get_msg(Encrypted, Priv))#msg.msg.
     
 test() ->
+    Pub1_64 = <<"BNFsD42eXjwHd4PyP4lODu+aybYjmVJF0bA0UYNcJ2/cELBl5Z6IA639jUl1km+8YAD3aL3of+SqLI8emuhsa2c=">>,
+    Priv1_64 = <<"wruxx99+2hK4cT+j1SkJhV6VzBxgbl11iHxnq6ghASA=">>,
+    Pub2_64 = <<"BA7HtKYPIvUwQjmUqNQ0UMsxHu+KtISveg45Jl+tl/y6OMgtyC3rE4/YrEHLtTprCPsxcus5CbhmlWo9IDKfnzo=">>,
+    Priv2_64 = <<"4a6E2IK3hhhP2dK8xGYaUqg23Fk/n/Ms2VuORKC5Xvo=">>,
+    M = [1,2,3],
+    SM = send_msg(M, Pub2_64, Pub1_64, Priv1_64),
+%["emsg","QlBKTURaYTZHTEdBc2FuM2Y5c3pjR0tja29KblVoLyt3NE92c21kT0hDa3pEcjlESlRDVmhHTFlqNWdINnhSYmszSlFkbzdRZ2ttZHByQVlVbDBiZkpBPQ==","ejFEWmM0TDEyY1g3Q3F0Q0ZZK3NETHptTld4UFhTeFpKSVAwUk9BZkZqWFVLRGUwQkdDMGl2ZFQ2Rk9IT0ZtTHJPSGRwbit0bWpKYzNjYzlKdEFLQW5aY3kxRVBmekNTSTRONWN4RDhFbzg3dEdWSUwzKytSbDdaZ1JWZE5STUp5MEhrUDJIZmVmSWZaQjV2VW9YTWhuYytKSVB3M0hmVFBlbjFUM29qdmxsanNBM3l6OC8vNGU5eWpKeDIwV0pHMnBFV3BmWEJYZDVJZklmeG53QWJTUGNhMTRGNE8rN1hYRjA0bks2U0ZQckZkYzgrUGxFZUZqbmxKRG9YOTMwenE3MHcrMDZjeElMV096RDE2bCtlSldZbzg5OGhSWUxHUlJvRTFGSE5XcjV3WDBCeWNjL3creWhCbDl3dkpsckM="]
+    io:fwrite(packer:pack(SM)).
+    %test2().
+test2() ->
     {Pub, Priv} = sign:new_key(),
     {Pub2, Priv2} = sign:new_key(),
     Val = <<"1234">>,
