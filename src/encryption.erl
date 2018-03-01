@@ -30,6 +30,10 @@ send_msg(M, ToPub, FromPub, FromPriv) ->
     {EphPub, EphPriv} = sign:new_key(),
     Msg = #msg{sig=sign:sign(EphPub, base64:decode(FromPriv)), msg=M, id = FromPub},
     SS = sign:shared_secret(ToPub, EphPriv),
+    io:fwrite("\n"),
+    io:fwrite("shared secret is "),
+    io:fwrite(SS),
+    io:fwrite("\n"),
     Emsg = sym_enc(base64:decode(SS), Msg),
     #emsg{key=EphPub, msg=base64:encode(Emsg)}.
 get_msg(Msg, Priv) ->
@@ -58,7 +62,10 @@ test() ->
     Priv2_64 = <<"4a6E2IK3hhhP2dK8xGYaUqg23Fk/n/Ms2VuORKC5Xvo=">>,
     M = [1,2,3],
     SM = send_msg(M, Pub2_64, Pub1_64, Priv1_64),
+%shared secret is RNRnra1gCHxjgfmxUOi3la7q32pGem54+bl8MMR2efU=
 %["emsg","QlBKTURaYTZHTEdBc2FuM2Y5c3pjR0tja29KblVoLyt3NE92c21kT0hDa3pEcjlESlRDVmhHTFlqNWdINnhSYmszSlFkbzdRZ2ttZHByQVlVbDBiZkpBPQ==","ejFEWmM0TDEyY1g3Q3F0Q0ZZK3NETHptTld4UFhTeFpKSVAwUk9BZkZqWFVLRGUwQkdDMGl2ZFQ2Rk9IT0ZtTHJPSGRwbit0bWpKYzNjYzlKdEFLQW5aY3kxRVBmekNTSTRONWN4RDhFbzg3dEdWSUwzKytSbDdaZ1JWZE5STUp5MEhrUDJIZmVmSWZaQjV2VW9YTWhuYytKSVB3M0hmVFBlbjFUM29qdmxsanNBM3l6OC8vNGU5eWpKeDIwV0pHMnBFV3BmWEJYZDVJZklmeG53QWJTUGNhMTRGNE8rN1hYRjA0bks2U0ZQckZkYzgrUGxFZUZqbmxKRG9YOTMwenE3MHcrMDZjeElMV096RDE2bCtlSldZbzg5OGhSWUxHUlJvRTFGSE5XcjV3WDBCeWNjL3creWhCbDl3dkpsckM="]
+    Sig = get_msg(SM, Priv2_64),
+    true = Sig#msg.msg == M,
     io:fwrite(packer:pack(SM)),
     test2().
 test2() ->
