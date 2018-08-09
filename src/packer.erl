@@ -31,6 +31,7 @@ unpack_helper(J) ->
     list_to_tuple([Out|lists:map(fun(X) -> unpack_helper(X) end, tl(J))]).
 pack(X) -> iolist_to_binary(jiffy:encode(untup(X))).
 -record(d, {a = "", b = "" }).
+is_b_atom(<<"ewah">>) -> true;
 is_b_atom(<<"sync_normal">>) -> true;
 is_b_atom(<<"sync_quick">>) -> true;
 is_b_atom(<<"multi_tx">>) -> true;
