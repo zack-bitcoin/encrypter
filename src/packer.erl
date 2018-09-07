@@ -96,7 +96,7 @@ is_b_atom(<<"cr">>) -> true;
 is_b_atom(<<"spend">>) -> true;
 is_b_atom(<<"create_acc_tx">>) -> true;
 is_b_atom(<<"unmatched">>) -> true;
-is_b_atom(<<"oracle_bet">>) -> true;
+is_b_atom(<<"oracle_bets">>) -> true;
 is_b_atom(<<"csc">>) -> true;
 is_b_atom(<<"repo">>) -> true;
 is_b_atom(<<"d">>) -> true;
