@@ -111,6 +111,7 @@ is_b_atom(<<"msg">>) -> true;
 is_b_atom(<<"cd">>) -> true;
 is_b_atom(<<"ob">>) -> true;
 is_b_atom(<<"order">>) -> true;
+is_b_atom(<<"orders">>) -> true;
 is_b_atom(<<"r">>) -> true;
 is_b_atom(<<"freq">>) -> true;
 is_b_atom(<<"sync">>) -> true;
