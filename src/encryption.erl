@@ -30,10 +30,10 @@ send_msg(M, ToPub, FromPub, FromPriv) ->
     {EphPub, EphPriv} = sign:new_key(),
     Msg = #msg{sig=sign:sign(EphPub, base64:decode(FromPriv)), msg=M, id = FromPub},
     SS = sign:shared_secret(ToPub, EphPriv),
-    io:fwrite("\n"),
-    io:fwrite("shared secret is "),
-    io:fwrite(SS),
-    io:fwrite("\n"),
+    %io:fwrite("\n"),
+    %io:fwrite("shared secret is "),
+    %io:fwrite(SS),
+    %io:fwrite("\n"),
     Emsg = sym_enc(base64:decode(SS), Msg),
     #emsg{key=EphPub, msg=base64:encode(Emsg)}.
 get_msg(Msg, Priv) ->
