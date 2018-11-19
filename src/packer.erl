@@ -108,6 +108,7 @@ is_b_atom(<<"gov">>) -> true;
 is_b_atom(<<"oracle">>) -> true;
 is_b_atom(<<"bet">>) -> true;
 is_b_atom(<<"trees">>) -> true;
+is_b_atom(<<"trees2">>) -> true;
 is_b_atom(<<"share">>) -> true;
 is_b_atom(<<"acc">>) -> true;
 is_b_atom(<<"msg">>) -> true;
