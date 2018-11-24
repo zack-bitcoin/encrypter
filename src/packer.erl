@@ -62,6 +62,7 @@ is_b_atom(<<"ss">>) -> true;
 is_b_atom(<<"exist">>) -> true;
 is_b_atom(<<"key">>) -> true;
 is_b_atom(<<"roots">>) -> true;
+is_b_atom(<<"roots2">>) -> true;
 is_b_atom(<<"proof">>) -> true;
 is_b_atom(<<"coinbase">>) -> true;
 is_b_atom(<<"settle_bets">>) -> true;
