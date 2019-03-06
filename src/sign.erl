@@ -14,9 +14,7 @@ new_key(P) ->
     
 sign(S, Priv) -> crypto:sign(ecdsa, sha256, serialize(S), [Priv, params()]).
 verify_sig(S, Sig, Pub) -> 
-    SD = Sig,
-    PD = Pub,
-    crypto:verify(ecdsa, sha256, serialize(S), SD, [PD, params()]).
+    crypto:verify(ecdsa, sha256, serialize(S), Sig, [Pub, params()]).
 serialize(X) when is_binary(X) -> 
     S = size(X),
     <<0:8, S:32, X/binary>>;
