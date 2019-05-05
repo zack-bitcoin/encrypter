@@ -31,6 +31,10 @@ unpack_helper(J) ->
     list_to_tuple([Out|lists:map(fun(X) -> unpack_helper(X) end, tl(J))]).
 pack(X) -> iolist_to_binary(jiffy:encode(untup(X))).
 -record(d, {a = "", b = "" }).
+is_b_atom(<<"add">>) -> true;
+is_b_atom(<<"get_offer_contract">>) -> true;
+is_b_atom(<<"get_offers">>) -> true;
+is_b_atom(<<"oracle_list">>) -> true;
 is_b_atom(<<"nc_offer">>) -> true;
 is_b_atom(<<"nc_accept">>) -> true;
 is_b_atom(<<"channel_sig">>) -> true;
