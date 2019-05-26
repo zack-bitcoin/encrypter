@@ -102,6 +102,7 @@ is_b_atom(<<"signed">>) -> true;
 is_b_atom(<<"bet">>) -> true;
 is_b_atom(<<"spk">>) -> true;
 is_b_atom(<<"ctc">>) -> true;
+is_b_atom(<<"ctc2">>) -> true;
 is_b_atom(<<"gc">>) -> true;
 is_b_atom(<<"delete_acc_tx">>) -> true;
 is_b_atom(<<"cs">>) -> true;
