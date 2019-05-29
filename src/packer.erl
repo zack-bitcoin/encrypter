@@ -32,6 +32,7 @@ unpack_helper(J) ->
 pack(X) -> iolist_to_binary(jiffy:encode(untup(X))).
 -record(d, {a = "", b = "" }).
 is_b_atom(<<"add">>) -> true;
+is_b_atom(<<"tx_scan">>) -> true;
 is_b_atom(<<"version">>) -> true;
 is_b_atom(<<"get_offer_contract">>) -> true;
 is_b_atom(<<"get_offers">>) -> true;
