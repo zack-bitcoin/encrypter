@@ -31,6 +31,18 @@ unpack_helper(J) ->
     list_to_tuple([Out|lists:map(fun(X) -> unpack_helper(X) end, tl(J))]).
 pack(X) -> iolist_to_binary(jiffy:encode(untup(X))).
 -record(d, {a = "", b = "" }).
+is_b_atom(<<"sortition_new_tx">>) -> true;
+is_b_atom(<<"sortition_contract_tx">>) -> true;
+is_b_atom(<<"sortition_timeout_tx">>) -> true;
+is_b_atom(<<"sortition_root_tx">>) -> true;
+is_b_atom(<<"sortition_slash_tx">>) -> true;
+is_b_atom(<<"sortition_chain">>) -> true;
+is_b_atom(<<"sortition_root">>) -> true;
+is_b_atom(<<"sortition_spent">>) -> true;
+is_b_atom(<<"sortition_channel">>) -> true;
+is_b_atom(<<"sortition_child">>) -> true;
+is_b_atom(<<"sortition_spk">>) -> true;
+is_b_atom(<<"sortition_evidence">>) -> true;
 is_b_atom(<<"add">>) -> true;
 is_b_atom(<<"tx_scan">>) -> true;
 is_b_atom(<<"version">>) -> true;
