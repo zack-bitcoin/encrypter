@@ -31,6 +31,7 @@ unpack_helper(J) ->
     list_to_tuple([Out|lists:map(fun(X) -> unpack_helper(X) end, tl(J))]).
 pack(X) -> iolist_to_binary(jiffy:encode(untup(X))).
 -record(d, {a = "", b = "" }).
+is_b_atom(<<"merkle_contract">>) -> true;
 is_b_atom(<<"sortition_new_tx">>) -> true;
 is_b_atom(<<"sortition_contract_tx">>) -> true;
 is_b_atom(<<"sortition_timeout_tx">>) -> true;
