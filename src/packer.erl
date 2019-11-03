@@ -45,6 +45,7 @@ is_b_atom(<<"sortition_child">>) -> true;
 is_b_atom(<<"sortition_spk">>) -> true;
 is_b_atom(<<"sortition_evidence">>) -> true;
 is_b_atom(<<"add">>) -> true;
+is_b_atom(<<"take">>) -> true;
 is_b_atom(<<"tx_scan">>) -> true;
 is_b_atom(<<"version">>) -> true;
 is_b_atom(<<"get_offer_contract">>) -> true;
