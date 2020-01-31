@@ -31,19 +31,14 @@ unpack_helper(J) ->
     list_to_tuple([Out|lists:map(fun(X) -> unpack_helper(X) end, tl(J))]).
 pack(X) -> iolist_to_binary(jiffy:encode(untup(X))).
 -record(d, {a = "", b = "" }).
-is_b_atom(<<"merkle_contract">>) -> true;
 is_b_atom(<<"sortition_new_tx">>) -> true;
-is_b_atom(<<"sortition_contract_tx">>) -> true;
+is_b_atom(<<"sortition_claim_tx">>) -> true;
+is_b_atom(<<"sortition_evidence_tx">>) -> true;
 is_b_atom(<<"sortition_timeout_tx">>) -> true;
-is_b_atom(<<"sortition_root_tx">>) -> true;
-is_b_atom(<<"sortition_slash_tx">>) -> true;
-is_b_atom(<<"sortition_chain">>) -> true;
-is_b_atom(<<"sortition_root">>) -> true;
-is_b_atom(<<"sortition_spent">>) -> true;
-is_b_atom(<<"sortition_channel">>) -> true;
-is_b_atom(<<"sortition_child">>) -> true;
-is_b_atom(<<"sortition_spk">>) -> true;
-is_b_atom(<<"sortition_evidence">>) -> true;
+is_b_atom(<<"rng_result_tx">>) -> true;
+is_b_atom(<<"rng_challenge_tx">>) -> true;
+is_b_atom(<<"rng_response_tx">>) -> true;
+is_b_atom(<<"rng_refute_tx">>) -> true;
 is_b_atom(<<"add">>) -> true;
 is_b_atom(<<"take">>) -> true;
 is_b_atom(<<"tx_scan">>) -> true;
@@ -134,7 +129,6 @@ is_b_atom(<<"d">>) -> true;
 is_b_atom(<<"channel">>) -> true;
 is_b_atom(<<"gov">>) -> true;
 is_b_atom(<<"oracle">>) -> true;
-is_b_atom(<<"bet">>) -> true;
 is_b_atom(<<"trees">>) -> true;
 is_b_atom(<<"trees2">>) -> true;
 is_b_atom(<<"trees3">>) -> true;
@@ -151,7 +145,6 @@ is_b_atom(<<"sync">>) -> true;
 is_b_atom(<<"height">>) -> true;
 is_b_atom(<<"off">>) -> true;
 is_b_atom(<<"balance">>) -> true;
-is_b_atom(<<"spend">>) -> true;
 is_b_atom(<<"mempool">>) -> true;
 is_b_atom(<<"top">>) -> true;
 is_b_atom(<<"sign">>) -> true;
@@ -199,7 +192,6 @@ is_b_atom(<<"f">>) -> true;
 is_b_atom(<<"test">>) -> true;
 is_b_atom(<<"return">>) -> true;
 is_b_atom(<<"checkpoint">>) -> true;
-is_b_atom(<<"rng_result_tx">>) -> true;
 is_b_atom(X) when is_binary(X) -> 
     io:fwrite("FAILED TO UNPACK ATOM "),
     io:fwrite(X),
