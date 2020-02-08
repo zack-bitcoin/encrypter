@@ -43,6 +43,7 @@ is_b_atom(<<"rng_refute_tx">>) -> true;
 is_b_atom(<<"rng_confirm_tx">>) -> true;
 is_b_atom(<<"x">>) -> true;
 is_b_atom(<<"owner">>) -> true;
+is_b_atom(<<"tree">>) -> true;
 is_b_atom(<<"add">>) -> true;
 is_b_atom(<<"take">>) -> true;
 is_b_atom(<<"tx_scan">>) -> true;
