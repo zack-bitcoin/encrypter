@@ -42,6 +42,7 @@ is_b_atom(<<"rng_challenge_tx">>) -> true;
 is_b_atom(<<"rng_response_tx">>) -> true;
 is_b_atom(<<"rng_refute_tx">>) -> true;
 is_b_atom(<<"rng_confirm_tx">>) -> true;
+is_b_atom(<<"final_spend">>) -> true;
 is_b_atom(<<"x">>) -> true;
 is_b_atom(<<"waiver">>) -> true;
 is_b_atom(<<"owner">>) -> true;
