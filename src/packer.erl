@@ -36,6 +36,7 @@ is_b_atom(<<"sortition_claim_tx">>) -> true;
 is_b_atom(<<"sortition_evidence_tx">>) -> true;
 is_b_atom(<<"sortition_timeout_tx">>) -> true;
 is_b_atom(<<"sortition_block_tx">>) -> true;
+is_b_atom(<<"sortition_final_spend_tx">>) -> true;
 is_b_atom(<<"rng_result_tx">>) -> true;
 is_b_atom(<<"rng_challenge_tx">>) -> true;
 is_b_atom(<<"rng_response_tx">>) -> true;
