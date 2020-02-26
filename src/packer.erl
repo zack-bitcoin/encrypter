@@ -39,6 +39,7 @@ is_b_atom(<<"sortition_block_tx">>) -> true;
 is_b_atom(<<"sortition_final_spend_tx">>) -> true;
 is_b_atom(<<"rng_result_tx">>) -> true;
 is_b_atom(<<"rng_challenge_tx">>) -> true;
+is_b_atom(<<"rng_challenge_cleanup_tx">>) -> true;
 is_b_atom(<<"rng_response_tx">>) -> true;
 is_b_atom(<<"rng_refute_tx">>) -> true;
 is_b_atom(<<"rng_confirm_tx">>) -> true;
