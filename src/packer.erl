@@ -38,6 +38,7 @@ is_b_atom(<<"sub_accounts">>) -> true;
 is_b_atom(<<"sub_channels">>) -> true;
 is_b_atom(<<"new_contract_tx">>) -> true;
 is_b_atom(<<"use_contract_tx">>) -> true;
+is_b_atom(<<"sub_spend_tx">>) -> true;
 is_b_atom(<<"sortition_new_tx">>) -> true;
 is_b_atom(<<"sortition_claim_tx">>) -> true;
 is_b_atom(<<"sortition_waiver_tx">>) -> true;
