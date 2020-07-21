@@ -40,6 +40,7 @@ is_b_atom(<<"new_contract_tx">>) -> true;
 is_b_atom(<<"use_contract_tx">>) -> true;
 is_b_atom(<<"sub_spend_tx">>) -> true;
 is_b_atom(<<"resolve_contract_tx">>) -> true;
+is_b_atom(<<"contract_resolve_tx">>) -> true;
 is_b_atom(<<"contract_timeout_tx">>) -> true;
 is_b_atom(<<"contract_winnings_tx">>) -> true;
 is_b_atom(<<"contract_simplify_tx">>) -> true;
