@@ -222,6 +222,8 @@ is_b_atom(<<"return">>) -> true;
 is_b_atom(<<"checkpoint">>) -> true;
 is_b_atom(<<"private">>) -> true;
 is_b_atom(<<"read_private">>) -> true;
+is_b_atom(<<"swap_tx">>) -> true;
+is_b_atom(<<"swap_offer">>) -> true;
 is_b_atom(X) when is_binary(X) -> 
     io:fwrite("FAILED TO UNPACK ATOM "),
     io:fwrite(X),
