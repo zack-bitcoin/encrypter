@@ -45,6 +45,8 @@ is_b_atom(<<"contract_resolve_tx">>) -> true;
 is_b_atom(<<"contract_timeout_tx">>) -> true;
 is_b_atom(<<"contract_winnings_tx">>) -> true;
 is_b_atom(<<"contract_simplify_tx">>) -> true;
+is_b_atom(<<"pair_buy_tx">>) -> true;
+is_b_atom(<<"pair_buy_offer">>) -> true;
 is_b_atom(<<"sortition_new_tx">>) -> true;
 is_b_atom(<<"sortition_claim_tx">>) -> true;
 is_b_atom(<<"sortition_waiver_tx">>) -> true;
