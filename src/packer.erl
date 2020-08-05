@@ -121,6 +121,7 @@ is_b_atom(<<"proof">>) -> true;
 is_b_atom(<<"coinbase">>) -> true;
 is_b_atom(<<"settle_bets">>) -> true;
 is_b_atom(<<"market">>) -> true;
+is_b_atom(<<"markets">>) -> true;
 is_b_atom(<<"oracles">>) -> true;
 is_b_atom(<<"market_data">>) -> true;
 is_b_atom(<<"learn_secret">>) -> true;
@@ -229,6 +230,7 @@ is_b_atom(<<"private">>) -> true;
 is_b_atom(<<"read_private">>) -> true;
 is_b_atom(<<"swap_tx">>) -> true;
 is_b_atom(<<"swap_offer">>) -> true;
+is_b_atom(<<"history">>) -> true;
 is_b_atom(X) when is_binary(X) -> 
     io:fwrite("FAILED TO UNPACK ATOM "),
     io:fwrite(X),
