@@ -168,6 +168,7 @@ is_b_atom(<<"trees2">>) -> true;
 is_b_atom(<<"trees3">>) -> true;
 is_b_atom(<<"share">>) -> true;
 is_b_atom(<<"acc">>) -> true;
+is_b_atom(<<"sub_acc">>) -> true;
 is_b_atom(<<"msg">>) -> true;
 is_b_atom(<<"cd">>) -> true;
 is_b_atom(<<"ob">>) -> true;
