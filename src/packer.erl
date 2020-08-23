@@ -117,6 +117,7 @@ is_b_atom(<<"key">>) -> true;
 is_b_atom(<<"roots">>) -> true;
 is_b_atom(<<"roots2">>) -> true;
 is_b_atom(<<"roots3">>) -> true;
+is_b_atom(<<"roots4">>) -> true;
 is_b_atom(<<"proof">>) -> true;
 is_b_atom(<<"coinbase">>) -> true;
 is_b_atom(<<"settle_bets">>) -> true;
@@ -166,6 +167,7 @@ is_b_atom(<<"oracle">>) -> true;
 is_b_atom(<<"trees">>) -> true;
 is_b_atom(<<"trees2">>) -> true;
 is_b_atom(<<"trees3">>) -> true;
+is_b_atom(<<"trees4">>) -> true;
 is_b_atom(<<"share">>) -> true;
 is_b_atom(<<"acc">>) -> true;
 is_b_atom(<<"sub_acc">>) -> true;
@@ -233,6 +235,9 @@ is_b_atom(<<"read_private">>) -> true;
 is_b_atom(<<"swap_tx">>) -> true;
 is_b_atom(<<"swap_offer">>) -> true;
 is_b_atom(<<"history">>) -> true;
+is_b_atom(<<"market_new_tx">>) -> true;
+is_b_atom(<<"market_liquidity_tx">>) -> true;
+is_b_atom(<<"market_swap_tx">>) -> true;
 is_b_atom(X) when is_binary(X) -> 
     io:fwrite("FAILED TO UNPACK ATOM "),
     io:fwrite(X),
