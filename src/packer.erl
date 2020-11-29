@@ -241,6 +241,7 @@ is_b_atom(<<"market_swap_tx">>) -> true;
 is_b_atom(<<"buy_shares">>) -> true;
 is_b_atom(<<"combine_shares">>) -> true;
 is_b_atom(<<"inflate">>) -> true;
+is_b_atom(<<"nonce">>) -> true;
 is_b_atom(X) when is_binary(X) -> 
     io:fwrite("FAILED TO UNPACK ATOM "),
     io:fwrite(X),
