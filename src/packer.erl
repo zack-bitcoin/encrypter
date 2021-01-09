@@ -235,6 +235,7 @@ is_b_atom(<<"read_private">>) -> true;
 is_b_atom(<<"swap_tx">>) -> true;
 is_b_atom(<<"swap_tx2">>) -> true;
 is_b_atom(<<"swap_offer">>) -> true;
+is_b_atom(<<"swap_offer2">>) -> true;
 is_b_atom(<<"history">>) -> true;
 is_b_atom(<<"market_new_tx">>) -> true;
 is_b_atom(<<"market_liquidity_tx">>) -> true;
