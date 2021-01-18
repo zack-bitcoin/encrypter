@@ -118,6 +118,7 @@ is_b_atom(<<"roots">>) -> true;
 is_b_atom(<<"roots2">>) -> true;
 is_b_atom(<<"roots3">>) -> true;
 is_b_atom(<<"roots4">>) -> true;
+is_b_atom(<<"roots5">>) -> true;
 is_b_atom(<<"proof">>) -> true;
 is_b_atom(<<"coinbase">>) -> true;
 is_b_atom(<<"settle_bets">>) -> true;
