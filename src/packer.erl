@@ -168,6 +168,7 @@ is_b_atom(<<"trees">>) -> true;
 is_b_atom(<<"trees2">>) -> true;
 is_b_atom(<<"trees3">>) -> true;
 is_b_atom(<<"trees4">>) -> true;
+is_b_atom(<<"trees5">>) -> true;
 is_b_atom(<<"share">>) -> true;
 is_b_atom(<<"acc">>) -> true;
 is_b_atom(<<"sub_acc">>) -> true;
@@ -245,6 +246,7 @@ is_b_atom(<<"buy_shares">>) -> true;
 is_b_atom(<<"combine_shares">>) -> true;
 is_b_atom(<<"inflate">>) -> true;
 is_b_atom(<<"nonce">>) -> true;
+is_b_atom(<<"stablecoin_new_tx">>) -> true;
 is_b_atom(X) when is_binary(X) -> 
     io:fwrite("FAILED TO UNPACK ATOM "),
     io:fwrite(X),
