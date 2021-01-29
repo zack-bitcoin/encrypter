@@ -36,6 +36,7 @@ is_b_atom(<<"contracts">>) -> true;
 is_b_atom(<<"accounts">>) -> true;
 is_b_atom(<<"sub_accounts">>) -> true;
 is_b_atom(<<"sub_channels">>) -> true;
+is_b_atom(<<"trades">>) -> true;
 is_b_atom(<<"new_contract_tx">>) -> true;
 is_b_atom(<<"contract_new_tx">>) -> true;
 is_b_atom(<<"contract_use_tx">>) -> true;
