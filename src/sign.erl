@@ -47,8 +47,12 @@ test() ->
     {Pub2, Priv2} = new_key(),
     S = <<"abc">>,
     S1 = <<1,2,3>>,
-    verify_sig(S1, sign(S, Priv), Pub),
-    verify_sig(S, sign(S, Priv), Pub),
+    false = verify_sig(S1, sign(S, de(Priv)), de(Pub)),
+    io:fwrite(packer:pack([S, sign(S, de(Priv)), de(Pub)])),
+    io:fwrite("\n"),
+%[-6,"YWJj","MEYCIQC5wn1SAdeHIiJND/JKQ2Xj/bEWCnBA8oOQy84E9J1tBAIhAIEXlKKjKAM6ynQV8g5p6itZkWXR6ASCNPb6tjZ4koaw","BH43IVb80hsX+HABXlQR3Mx5XEJd35fBh6ZII4iP/BZCOOUksCAvm09zqeMbK0cXglBG/lnb/GS8Nk6QNYLMb4I="]
+    %sig is 72 bytes.
+    true = verify_sig(S, sign(S, de(Priv)), de(Pub)),
     SS = shared_secret(Pub, Priv2),
     SS = shared_secret(Pub2, Priv),
     success.

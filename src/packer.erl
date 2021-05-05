@@ -44,6 +44,7 @@ is_b_atom(<<"sub_spend_tx">>) -> true;
 is_b_atom(<<"contract_evidence_tx">>) -> true;
 is_b_atom(<<"contract_resolve_tx">>) -> true;
 is_b_atom(<<"contract_timeout_tx">>) -> true;
+is_b_atom(<<"contract_timeout_tx2">>) -> true;
 is_b_atom(<<"contract_winnings_tx">>) -> true;
 is_b_atom(<<"contract_simplify_tx">>) -> true;
 is_b_atom(<<"pair_buy_tx">>) -> true;
