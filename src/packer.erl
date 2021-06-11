@@ -253,6 +253,7 @@ is_b_atom(<<"stablecoin_new_tx">>) -> true;
 is_b_atom(<<"receipts">>) -> true;
 is_b_atom(<<"close_oracles">>) -> true;
 is_b_atom(<<"withdraw_from_oracles">>) -> true;
+is_b_atom(<<"tx2">>) -> true;
 is_b_atom(X) when is_binary(X) -> 
     io:fwrite("FAILED TO UNPACK ATOM "),
     io:fwrite(X),
