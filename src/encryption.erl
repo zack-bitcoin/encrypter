@@ -14,11 +14,13 @@ si(Key) ->
 
 %This version can be used exactly once with each private key.
 bin_enc(Key, Bin) ->
-    {_, X} = crypto:stream_encrypt(si(Key), Bin),
-    X.
+    crypto:crypto_one_time(aes_ctr, Key, <<0:128>>, Bin, true).
+   % {_, X} = crypto:stream_encrypt(si(Key), Bin),
+   % X.
 bin_dec(Key, Msg) ->
-    {_, Y} = crypto:stream_decrypt(si(Key), Msg),
-    Y.
+    crypto:crypto_one_time(aes_ctr, Key, <<0:128>>, Msg, false).
+    %{_, Y} = crypto:stream_decrypt(si(Key), Msg),
+    %Y.
 %sym_enc(Key, Msg) -> bin_enc(Key, term_to_binary(Msg)).
 sym_enc(Key, Msg) -> bin_enc(Key, packer:pack(Msg)).
 %sym_dec(Key, Emsg) -> binary_to_term(bin_dec(Key, Emsg)).
