@@ -12,21 +12,30 @@ id(Msg) -> Msg#msg.id.
 si(Key) -> 
     crypto:stream_init(aes_ctr, Key, <<0:128>>).%because each key is used for encryption at most once, we can use a static initialization vector.
 
-%This version can be used exactly once with each private key.
 bin_enc(Key, Bin) ->
-    crypto:crypto_one_time(aes_ctr, Key, <<0:128>>, Bin, true).
-   % {_, X} = crypto:stream_encrypt(si(Key), Bin),
-   % X.
+    R = list_to_integer(erlang:system_info(otp_release)),
+    if
+        R > 23 ->
+            crypto:crypto_one_time(aes_ctr, Key, <<0:128>>, Bin, true);
+        true ->
+            {_, X} = crypto:stream_encrypt(si(Key), Bin),
+            X
+    end.
 bin_dec(Key, Msg) ->
-    crypto:crypto_one_time(aes_ctr, Key, <<0:128>>, Msg, false).
-    %{_, Y} = crypto:stream_decrypt(si(Key), Msg),
-    %Y.
+    R = list_to_integer(erlang:system_info(otp_release)),
+    if
+        R > 23 ->
+            crypto:crypto_one_time(aes_ctr, Key, <<0:128>>, Msg, false);
+        true ->
+            {_, Y} = crypto:stream_decrypt(si(Key), Msg),
+            Y
+    end.
 %sym_enc(Key, Msg) -> bin_enc(Key, term_to_binary(Msg)).
 sym_enc(Key, Msg) -> bin_enc(Key, packer:pack(Msg)).
 %sym_dec(Key, Emsg) -> binary_to_term(bin_dec(Key, Emsg)).
 sym_dec(Key, Emsg) -> 
     B = bin_dec(Key, Emsg),
-    packer:unpack(bin_dec(Key, Emsg)).
+    packer:unpack(B).
 %this version is good for a blockchain situation where you want to send a message to someone who's public key you know.
 send_msg(M, ToPub, FromPub, FromPriv) -> 
     {EphPub, EphPriv} = sign:new_key(),
