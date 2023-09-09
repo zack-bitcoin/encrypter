@@ -259,8 +259,8 @@ is_b_atom(<<"tx">>) -> true;
 is_b_atom(<<"empty">>) -> true;
 is_b_atom(<<"job">>) -> true;
 is_b_atom(<<"jobs">>) -> true;
-is_b_atom(<<"jobs_create_tx">>) -> true;
-is_b_atom(<<"jobs_receive_salary_tx">>) -> true;
+is_b_atom(<<"job_create_tx">>) -> true;
+is_b_atom(<<"job_receive_salary_tx">>) -> true;
 is_b_atom(X) when is_binary(X) -> 
     io:fwrite("FAILED TO UNPACK ATOM "),
     io:fwrite(X),
