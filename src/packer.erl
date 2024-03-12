@@ -269,6 +269,8 @@ is_b_atom(<<"futarchy_unmatched">>) -> true;
 is_b_atom(<<"futarchy_matched">>) -> true;
 is_b_atom(<<"futarchy_new_tx">>) -> true;
 is_b_atom(<<"futarchy_bet_tx">>) -> true;
+is_b_atom(<<"futarchy_matched_tx">>) -> true;
+is_b_atom(<<"futarchy_unmatched_tx">>) -> true;
 is_b_atom(X) when is_binary(X) -> 
     io:fwrite("FAILED TO UNPACK ATOM "),
     io:fwrite(X),
@@ -276,7 +278,8 @@ is_b_atom(X) when is_binary(X) ->
     false;
 is_b_atom(_) -> false.
 test() -> 
-    Record = #d{a=[1, 2, <<"abc">>, [], #d{}], b = <<1,2,3,200, 0:80000>> },
+    Record = #d{a=[1, 2, <<"abc">>, [], #d{}], 
+                b = <<1,2,3,200, 0:80000>> },
     %ABC = {unlock, 24001,1,[{signed,{channel_block,0,3,-9500,3,[],24001,false,259,0,0,0],"TUVZQ0lRQzlwVkxjQ0hReXhpWE0zOU43bVFOS1pTV01WS0MxMkNUYjUwZSs4MkRnd3dJaEFPZG1lWlp0VXdjUXU0UjQzazhRWkREd29tb1BuQ05TWlhDSEl0QU5PemRj",[-6],[-6]],0]],
     %New = ["unlock2",24001,1,[["signed",["channel_block",0,3,-9500,3,[-6],24001,false,259,0,0,0],"TUVZQ0lRQzlwVkxjQ0hReXhpWE0zOU43bVFOS1pTV01WS0MxMkNUYjUwZSs4MkRnd3dJaEFPZG1lWlp0VXdjUXU0UjQzazhRWkREd29tb1BuQ05TWlhDSEl0QU5PemRj",[-6],[-6]],0]],
     List = [[],3,[4]],
