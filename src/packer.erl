@@ -269,6 +269,7 @@ is_b_atom(<<"futarchy_unmatched">>) -> true;
 is_b_atom(<<"futarchy_matched">>) -> true;
 is_b_atom(<<"futarchy_new_tx">>) -> true;
 is_b_atom(<<"futarchy_bet_tx">>) -> true;
+is_b_atom(<<"futarchy_resolve_tx">>) -> true;
 is_b_atom(<<"futarchy_matched_tx">>) -> true;
 is_b_atom(<<"futarchy_unmatched_tx">>) -> true;
 is_b_atom(X) when is_binary(X) -> 
