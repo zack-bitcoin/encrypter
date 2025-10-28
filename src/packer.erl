@@ -87,6 +87,7 @@ is_b_atom(<<"channel_sig">>) -> true;
 is_b_atom(<<"send">>) -> true;
 is_b_atom(<<"read">>) -> true;
 is_b_atom(<<"block_hash">>) -> true;
+is_b_atom(<<"block_hashes">>) -> true;
 is_b_atom(<<"governance">>) -> true;
 is_b_atom(<<"existence">>) -> true;
 is_b_atom(<<"new_scalar_oracle">>) -> true;
@@ -139,6 +140,7 @@ is_b_atom(<<"channel_payment">>) -> true;
 is_b_atom(<<"emsg">>) -> true;
 is_b_atom(<<"new_channel">>) -> true;
 is_b_atom(<<"txs">>) -> true;
+is_b_atom(<<"tx_pool">>) -> true;
 is_b_atom(<<"ok">>) -> true;
 is_b_atom(<<"pow">>) -> true;
 is_b_atom(<<"prev_hashes">>) -> true;
@@ -273,6 +275,14 @@ is_b_atom(<<"futarchy_resolve_tx">>) -> true;
 is_b_atom(<<"futarchy_matched_tx">>) -> true;
 is_b_atom(<<"futarchy_unmatched_tx">>) -> true;
 is_b_atom(<<"status">>) -> true;
+is_b_atom(<<"block_db3">>) -> true;
+is_b_atom(<<"blacklist_peer">>) -> true;
+is_b_atom(<<"tx_pool_feeder">>) -> true;
+is_b_atom(<<"request_frequency">>) -> true;
+is_b_atom(<<"oracle_questions">>) -> true;
+is_b_atom(<<"potential_block">>) -> true;
+is_b_atom(<<"push_block">>) -> true;
+is_b_atom(<<"peers_height">>) -> true;
 is_b_atom(X) when is_binary(X) -> 
     io:fwrite("FAILED TO UNPACK ATOM "),
     io:fwrite(X),
