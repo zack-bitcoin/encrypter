@@ -27,6 +27,7 @@ serialize(X) when is_tuple(X) ->
     S = size(A),
     <<2:8, S:32, A/binary>>;
 serialize(X) when is_integer(X) -> 
+    %every integer is 64 bytes. this is not efficient.
     <<3:8, X:512>>;
 serialize(X) when is_atom(X) -> 
     A = list_to_binary(atom_to_list(X)),
