@@ -11,13 +11,21 @@ untup(X) when is_binary(X) -> base64:encode(X);
 untup(X) -> X.
 unpack(I) when is_integer(I) -> I;
 unpack(JSON) -> unpack_helper(jiffy:decode(JSON)).
-unpack_helper(J) when is_binary(J) -> base64:decode(J);
+unpack_helper(J) when is_binary(J) -> 
+    %base64:decode(J);
+    try base64:decode(J) of
+        X -> X
+    catch
+        _:_ -> invalid
+    end;
 %unpack_helper(J) when is_binary(J) -> J;%bad
 unpack_helper(J) when not is_list(J) -> J;
 unpack_helper(J) when hd(J) == ?LIST_KEY -> 
-    lists:map(fun(X) -> unpack_helper(X) end, tl(J));
+    %lists:map(fun(X) -> unpack_helper(X) end, tl(J));
+    unpack_helper_list(tl(J), []);
 unpack_helper(J) when hd(J) == ?TUPLE_KEY ->
-    list_to_tuple(lists:map(fun(X) -> unpack_helper(X) end, tl(J)));
+    list_to_tuple(unpack_helper_list(tl(J), []));
+    %list_to_tuple(lists:map(fun(X) -> unpack_helper(X) end, tl(J)));
 unpack_helper(J) -> 
     K = hd(J),
     B = is_b_atom(K),
@@ -26,9 +34,19 @@ unpack_helper(J) ->
 	      B -> 
 		  binary_to_atom(K, latin1);
 	      is_integer(K) -> K;
-	      true -> 1=2
+	      true -> invalid
 	  end,
-    list_to_tuple([Out|lists:map(fun(X) -> unpack_helper(X) end, tl(J))]).
+    case unpack_helper_list(tl(J), []) of
+        invalid -> invalid;
+        X -> list_to_tuple([Out|X])
+    end.
+%    list_to_tuple([Out|lists:map(fun(X) -> unpack_helper(X) end, tl(J))]).
+unpack_helper_list([], R) -> lists:reverse(R);
+unpack_helper_list([H|T], R) ->
+    case unpack_helper(H) of
+        invalid -> invalid;
+        X -> unpack_helper_list(T, [X|R])
+    end.
 pack(X) -> iolist_to_binary(jiffy:encode(untup(X))).
 -record(d, {a = "", b = "" }).
 is_b_atom(<<"contract">>) -> true;
