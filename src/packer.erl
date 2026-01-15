@@ -301,6 +301,8 @@ is_b_atom(<<"oracle_questions">>) -> true;
 is_b_atom(<<"potential_block">>) -> true;
 is_b_atom(<<"push_block">>) -> true;
 is_b_atom(<<"peers_height">>) -> true;
+is_b_atom(<<"stem">>) -> true;
+is_b_atom(<<"leaf">>) -> true;
 is_b_atom(X) when is_binary(X) -> 
     io:fwrite("FAILED TO UNPACK ATOM "),
     io:fwrite(X),
